@@ -16,7 +16,7 @@ public partial class ListaProduto : ContentPage
         }
         catch (Exception ex)
         {
-            DisplayAlertAsync("Ops", ex.Message, "OK");
+            DisplayAlert("Ops", ex.Message, "OK");
         }
     }
 }
