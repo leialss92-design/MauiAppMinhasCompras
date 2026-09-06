@@ -16,6 +16,10 @@ public partial class ListaProduto : ContentPage
 
     protected async override void OnAppearing()
     {
+        base.OnAppearing();
+
+        lista.Clear();
+
         List<Produto> tmp = await App.Db.GetAll();
 
         tmp.ForEach(i => lista.Add(i));
@@ -26,7 +30,6 @@ public partial class ListaProduto : ContentPage
         try
         {
             Navigation.PushAsync(new Views.NovoProduto());
-
         }
         catch (Exception ex)
         {
@@ -36,7 +39,7 @@ public partial class ListaProduto : ContentPage
 
     private async void txt_search_TextChanged(object sender, TextChangedEventArgs e)
     {
-        string q = e.NewTextValue;
+        string q = e.NewTextValue ?? "";
 
         lista.Clear();
 
@@ -51,7 +54,7 @@ public partial class ListaProduto : ContentPage
 
         string msg = $"O total é {soma:C}";
 
-        DisplayAlert("Total dos Produtos", msg, "OK"); //aparece no final da tela.
+        DisplayAlert("Total dos Produtos", msg, "OK");
     }
 
     private void MenuItem_Clicked(object sender, EventArgs e)
